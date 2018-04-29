@@ -1,0 +1,16 @@
+
+        <input type="text" [(ngModel)]="customer.name">
+        <article class="panel panel-default">
+          <div class="panel-body">
+            {{customer.name}}
+          </div>
+          <footer class="panel-footer">
+            <div class="author">
+              {{customer.name}}
+            </div>
+            <div class="config">
+              <a (click)="onEdit()" href="#">Edit</a>
+              <a href="#">Delete</a>
+            </div>
+          </footer>
+                </article>

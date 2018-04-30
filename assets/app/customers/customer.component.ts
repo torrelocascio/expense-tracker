@@ -1,5 +1,6 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core'
+import {Component, Input} from '@angular/core'
 import {Customer} from "./customer.model"
+import { CustomerService } from './customer.service';
 
 
 @Component ({
@@ -24,10 +25,15 @@ import {Customer} from "./customer.model"
 
 export class CustomerComponent {
   @Input() customer: Customer;
-  @Output() editClicked = new EventEmitter<string>();
+
+  constructor(private customerService: CustomerService){}
 
   onEdit(){
-    alert('YEEEE')
-    this.editClicked.emit('A New Value')
+    this.customerService.editCustomer(this.customer)
+
+  }
+
+  onDelete(){
+    this.customerService.deleteCustomer(this.customer)
   }
 }

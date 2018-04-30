@@ -1,5 +1,7 @@
-import {Component} from '@angular/core'
+import {Component, OnInit} from '@angular/core'
 import {Customer} from './customer.model'
+import {CustomerService} from "./customer.service"
+
 
 @Component({
   selector: 'app-customer-list',
@@ -7,16 +9,24 @@ import {Customer} from './customer.model'
   <div class="col-md-8 col-md-offset-2">
     <app-customer 
       [customer]="customer" 
-      (editClicked)="customer.name = $event"
       *ngFor="let customer of customers">
     </app-customer>
   </div>
   `
 })
 
-export class CustomerListComponent{
-  customers: Customer[] = [
-    new Customer('Customer A'),
-    new Customer ('Customer B')
-]
+export class CustomerListComponent implements OnInit {
+  customers: Customer[] 
+
+constructor(private customerService: CustomerService){}
+
+ngOnInit(){
+  this.customerService.getCustomers()
+    .subscribe(
+      (customers: Customer[]) =>{
+        this.customers=customers
+        }
+    );
+}
+
 }

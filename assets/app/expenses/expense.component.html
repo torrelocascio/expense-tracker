@@ -2,14 +2,14 @@
         
         <article class="panel panel-default">
           <div class="panel-body">
-            {{customer.name}}
+            {{expense.name}}
           </div>
           <footer class="panel-footer">
             <div class="author">
-              {{customer.name}}
+              {{expense.name}}
             </div>
             <div class="config">
-              <a (click)="onEdit()">Edit</a>
+              <a (click)="onEdit()" href="#">Edit</a>
               <a (click)="onDelete()">Delete</a>
             </div>
           </footer>

@@ -1,14 +1,13 @@
 export class Customer {
   name: string;
-  ownerName: string;
-  customerId: string;
-  userId: string;
+  id: string;
+  projects: [string]
 
-constructor(name: string, ownerName?: string, customerId?: string, userId?: string){
+constructor(name: string, id?: string, projects?: [string]){
   this.name = name;
-  this.ownerName = ownerName;
-  this.customerId = customerId;
-  this.userId = userId;
+  this.id = id;
+  this.projects = projects
+  
   }
 
 }

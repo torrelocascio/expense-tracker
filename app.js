@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
 
 var appRoutes = require('./routes/app');
+var customerRoutes = require('./routes/customers');
+
 
 var app = express();
 mongoose.connect('mongodb://localhost:27017/pbsd-expense-project'); 
@@ -30,7 +32,9 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/customer', customerRoutes)
 app.use('/', appRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

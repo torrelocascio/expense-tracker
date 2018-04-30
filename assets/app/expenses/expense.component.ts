@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core'
+import {Component, Input} from '@angular/core'
 import {Expense} from "./expense.model"
 import { ExpenseService } from './expense.service';
 
@@ -25,16 +25,19 @@ import { ExpenseService } from './expense.service';
 
 export class ExpenseComponent {
   @Input() expense: Expense;
-  @Output() editClicked = new EventEmitter<string>();
 
   constructor(private expenseService: ExpenseService){}
 
   onEdit(){
-    alert('YEEEE')
-    this.editClicked.emit('A New Value')
+    this.expenseService.editExpense(this.expense)
+
   }
 
   onDelete(){
     this.expenseService.deleteExpense(this.expense)
+      .subscribe(
+        result => console.log(result)
+      )
   }
 }
+

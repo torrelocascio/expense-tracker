@@ -8,6 +8,8 @@ var mongoose = require('mongoose')
 
 var appRoutes = require('./routes/app');
 var customerRoutes = require('./routes/customers');
+var projectRoutes = require('./routes/projects');
+var expenseRoutes = require('./routes/expenses');
 
 
 var app = express();
@@ -32,13 +34,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('./expense', expenseRoutes)
+app.use('/project', projectRoutes)
 app.use('/customer', customerRoutes)
 app.use('/', appRoutes);
 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    return res.render('index');
+    return res.redirect('/');
 });
 
 

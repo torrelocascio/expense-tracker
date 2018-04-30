@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core'
+import {Component, Input} from '@angular/core'
 import {Project} from "./project.model"
 import { ProjectService } from './project.service';
 
@@ -25,16 +25,19 @@ import { ProjectService } from './project.service';
 
 export class ProjectComponent {
   @Input() project: Project;
-  @Output() editClicked = new EventEmitter<string>();
 
-  constructor(private customerService: ProjectService){}
+  constructor(private projectService: ProjectService){}
 
   onEdit(){
-    alert('YEEEE')
-    this.editClicked.emit('A New Value')
+    this.projectService.editProject(this.project)
+
   }
 
   onDelete(){
-    this.customerService.deleteProject(this.project)
+    this.projectService.deleteProject(this.project)
+      .subscribe(
+        result => console.log(result)
+      )
   }
 }
+

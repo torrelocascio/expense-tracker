@@ -5,6 +5,7 @@ import {Observable} from 'rxjs'
 
 
 import {Customer} from "./customer.model"
+import { ErrorService } from '../errors/error.service';
 
 @Injectable()
 
@@ -12,7 +13,7 @@ export class CustomerService{
   customers: Customer[] = [];
   customerIsEdit = new EventEmitter<Customer>()
   
-  constructor(private http: Http) {}
+  constructor(private http: Http, private errorService: ErrorService) {}
 
   addCustomer(customer: Customer){
     const body = JSON.stringify(customer)
@@ -22,10 +23,15 @@ export class CustomerService{
             const result = response.json()
             const customer = new Customer(result.obj.name,result.obj._id)
             this.customers.push(customer)
+            console.log("HERE")
             return customer
           })
          
-          .catch((error: any) => Observable.throw(error.json()))
+          .catch((error: Response) => {
+            console.log("ERROR IN ADD")
+            this.errorService.handleError(error.json())
+           return Observable.throw(error.json())
+          })
   }
 
   getCustomers(){
@@ -39,7 +45,10 @@ export class CustomerService{
         this.customers = transformedCustomers
         return transformedCustomers
       })
-      .catch((error: Response) => Observable.throw(error))
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json())
+       return Observable.throw(error.json())
+      })
       
   }
 
@@ -52,14 +61,20 @@ updateCustomer(customer:Customer){
   const headers = new Headers({'Content-Type': 'application/json'})
  return this.http.patch('http://localhost:3000/customer/'+ customer.id , body , {headers: headers})
         .map((response: Response) => response.json())
-        .catch((error: Response) => Observable.throw(error.json()))
+        .catch((error: Response) => {
+          this.errorService.handleError(error.json())
+         return Observable.throw(error.json())
+        })
 }
 
 deleteCustomer(customer: Customer){
   this.customers.splice(this.customers.indexOf(customer), 1);
   return this.http.delete('http://localhost:3000/customer/'+ customer.id)
   .map((response: Response) => response.json())
-  .catch((error: Response) => Observable.throw(error.json()))
+  .catch((error: Response) => {
+    this.errorService.handleError(error.json())
+   return Observable.throw(error.json())
+  })
 }
 
 

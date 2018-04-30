@@ -35,7 +35,11 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { ExpenseInputComponent } from './expenses/expense-input.component';
 import { ExpenseListComponent } from './expenses/expense-list.component';
 
+//Misc Components
+
 import { HttpModule } from '@angular/http';
+import { ErrorComponent } from './errors/error.component';
+import {ErrorService} from './errors/error.service'
 
 
 
@@ -62,7 +66,9 @@ import { HttpModule } from '@angular/http';
         ExpenseComponent,
         ExpenseInputComponent,
         ExpenseListComponent,
-        ExpensesComponent
+        ExpensesComponent,
+
+        ErrorComponent
 
     ],
     imports: [
@@ -72,6 +78,7 @@ import { HttpModule } from '@angular/http';
         ReactiveFormsModule,
         HttpModule
     ],
+    providers: [ErrorService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

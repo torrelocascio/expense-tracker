@@ -9,7 +9,6 @@ import {ProjectService} from "./project.service"
   <div class="col-md-8 col-md-offset-2">
     <app-project 
       [project]="project" 
-      (editClicked)="project.name = $event"
       *ngFor="let project of projects">
     </app-project>
   </div>
@@ -22,6 +21,12 @@ export class ProjectListComponent implements OnInit {
 constructor(private projectService: ProjectService){}
 
 ngOnInit(){
-  this.projects = this.projectService.getProjects()
+  this.projectService.getProjects()
+    .subscribe(
+      (projects: Project[]) =>{
+        this.projects=projects
+        }
+    );
 }
+
 }

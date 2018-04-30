@@ -9,7 +9,6 @@ import {ExpenseService} from "./expense.service"
   <div class="col-md-8 col-md-offset-2">
     <app-expense 
       [expense]="expense" 
-      (editClicked)="expense.name = $event"
       *ngFor="let expense of expenses">
     </app-expense>
   </div>
@@ -22,6 +21,12 @@ export class ExpenseListComponent implements OnInit {
 constructor(private expenseService: ExpenseService){}
 
 ngOnInit(){
-  this.expenses = this.expenseService.getExpenses()
+  this.expenseService.getExpenses()
+    .subscribe(
+      (expenses: Expense[]) =>{
+        this.expenses=expenses
+        }
+    );
 }
+
 }

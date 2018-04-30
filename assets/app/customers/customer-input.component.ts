@@ -25,13 +25,13 @@ export class CustomerInputComponent implements OnInit{
       )
       this.customer = null
     } else {
-// const customer = new Customer(form.value.name);
-// this.customerService.addCustomer(customer)
-//     .subscribe(
-//       data => console.log('DATAAA',data),
-//       error => console.log(error),
+const customer = new Customer(form.value.name);
+this.customerService.addCustomer(customer)
+    .subscribe(
+      data => console.log('DATAAA',data),
+      error => console.log(error),
 
-    // )
+    )
   }
 form.resetForm()
   

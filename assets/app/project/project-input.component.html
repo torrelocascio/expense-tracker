@@ -2,15 +2,16 @@
  <div class="col-md-8 col-md.offset-2"> 
     <form (ngSubmit)="onSubmit(f)" #f="ngForm"> 
       <div class="form-group">
-        <label for ="content">Name</label>
+        <label for ="name">Name</label>
         <input 
         type="text" 
         id="name" 
         class="form-control"
-        ngModel
+        [ngModel]="project?.name"
         name="name"
         required>
-        <button class="btn btn-primary" type="submit" onsubmit="" >Save</button>
+        <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
+        <button class="btn btn-primary" type="submit">Save</button>
       </div>
     </form>
   </div>

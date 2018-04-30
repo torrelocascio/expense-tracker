@@ -11,7 +11,6 @@ export class LoginComponent implements OnInit {
   myForm: FormGroup;
 
   onSubmit(){
-    console.log(this.myForm)
     this.myForm.reset()
   }
 

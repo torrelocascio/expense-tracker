@@ -20,19 +20,18 @@ export class CustomerInputComponent implements OnInit{
     if (this.customer){
       this.customer.name = form.value.name;
       this.customerService.updateCustomer(this.customer)
-        .subscribe(
-          result => console.log(result)
-        )
+      .subscribe(
+        result => console.log(result)
+      )
       this.customer = null
-    }
-    else {
-const customer = new Customer(form.value.name);
-this.customerService.addCustomer(customer)
-    .subscribe(
-      data => console.log(data),
-      error => console.log(error),
+    } else {
+// const customer = new Customer(form.value.name);
+// this.customerService.addCustomer(customer)
+//     .subscribe(
+//       data => console.log('DATAAA',data),
+//       error => console.log(error),
 
-    )
+    // )
   }
 form.resetForm()
   

@@ -37,29 +37,30 @@ export class CustomerService{
           transformedCustomers.push(new Customer(customer.name, customer._id))
         }
         this.customers = transformedCustomers
-        console.log(transformedCustomers)
         return transformedCustomers
       })
       .catch((error: Response) => Observable.throw(error))
       
   }
 
-  deleteCustomer(customer: Customer){
-    this.customers.splice(this.customers.indexOf(customer), 1);
-  }
-
-
 editCustomer(customer: Customer){
   this.customerIsEdit.emit(customer)
 }
 
 updateCustomer(customer:Customer){
-  this.customers.push(customer);
   const body = JSON.stringify(customer)
   const headers = new Headers({'Content-Type': 'application/json'})
  return this.http.patch('http://localhost:3000/customer/'+ customer.id , body , {headers: headers})
-        .map((response: any) => response.json())
-        .catch((error: any) => Observable.throw(error.json()))
+        .map((response: Response) => response.json())
+        .catch((error: Response) => Observable.throw(error.json()))
 }
+
+deleteCustomer(customer: Customer){
+  this.customers.splice(this.customers.indexOf(customer), 1);
+  return this.http.delete('http://localhost:3000/customer/'+ customer.id)
+  .map((response: Response) => response.json())
+  .catch((error: Response) => Observable.throw(error.json()))
+}
+
 
 }

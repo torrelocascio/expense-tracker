@@ -37,14 +37,14 @@ router.post('/', function (req, res, next) {
 });
 
 router.patch('/:id', function(req,res,next){
-        Customer.findById(req.params.id, function(err,message){
+        Customer.findById(req.params.id, function(err,customer){
                 if(err){
                         return res.status(500).json({
                                 title: 'An Error Occurred',
                                 error: err
                         })
                 }
-                if (!message){
+                if (!customer){
                         return res.status(500).json({
                                 title: 'No Customer Found!',
                                 error: {customer:'Customer Not Found'}
@@ -60,6 +60,35 @@ router.patch('/:id', function(req,res,next){
                         }
                         res.status(201).json({
                                 customer: 'Updated Customer',
+                                obj: result
+                        })  
+                })
+        })
+})
+
+router.delete('/:id', function(req, res, next){
+        Customer.findById(req.params.id, function(err,customer){
+                if(err){
+                        return res.status(500).json({
+                                title: 'An Error Occurred',
+                                error: err
+                        })
+                }
+                if (!customer){
+                        return res.status(500).json({
+                                title: 'No Customer Found!',
+                                error: {customer:'Customer Not Found'}
+                        })
+                }
+                customer.remove(function(err, result){
+                        if (err){
+                                return res.status(200).json({
+                                        title: 'An Error Occured',
+                                        error: err
+                                })
+                        }
+                        res.status(200).json({
+                                customer: 'Customer Deleted',
                                 obj: result
                         })  
                 })

@@ -10,7 +10,6 @@ export class ProjectService{
 
   addProject(project: Project){
     this.projects.push(project);
-    console.log(project)
   }
 
   getProjects(){

@@ -35,5 +35,8 @@ export class CustomerComponent {
 
   onDelete(){
     this.customerService.deleteCustomer(this.customer)
+      .subscribe(
+        result => console.log(result)
+      )
   }
 }

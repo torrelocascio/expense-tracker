@@ -10,7 +10,6 @@ export class ExpenseService{
 
   addExpense(expense: Expense){
     this.expenses.push(expense);
-    console.log(expense)
   }
 
   getExpenses(){

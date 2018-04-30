@@ -34,7 +34,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('./expense', expenseRoutes)
+
+app.use('/expense', expenseRoutes)
 app.use('/project', projectRoutes)
 app.use('/customer', customerRoutes)
 app.use('/', appRoutes);

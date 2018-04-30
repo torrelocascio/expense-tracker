@@ -27,16 +27,17 @@ export class CustomerService{
             return customer
           })
          
-          .catch((error: Response) => {
-            console.log("ERROR IN ADD")
-            this.errorService.handleError(error.json())
-           return Observable.throw(error.json())
-          })
+          // .catch((error: Response) => {
+          //   console.log("ERROR IN ADD")
+          //   this.errorService.handleError(error.json())
+          //  return Observable.throw(error.json())
+          // })
   }
 
   getCustomers(){
     return this.http.get('http://localhost:3000/customer')
       .map((response:Response)=> {
+        console.log(response.json().obj)
         const customers = response.json().obj;
         let transformedCustomers: Customer[] = [];
         for(let customer of customers) {
@@ -45,10 +46,10 @@ export class CustomerService{
         this.customers = transformedCustomers
         return transformedCustomers
       })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json())
-       return Observable.throw(error.json())
-      })
+      // .catch((error: Response) => {
+      //   this.errorService.handleError(error.json())
+      //  return Observable.throw(error.json())
+      // })
       
   }
 
@@ -61,20 +62,20 @@ updateCustomer(customer:Customer){
   const headers = new Headers({'Content-Type': 'application/json'})
  return this.http.patch('http://localhost:3000/customer/'+ customer.id , body , {headers: headers})
         .map((response: Response) => response.json())
-        .catch((error: Response) => {
-          this.errorService.handleError(error.json())
-         return Observable.throw(error.json())
-        })
+        // .catch((error: Response) => {
+        //   this.errorService.handleError(error.json())
+        //  return Observable.throw(error.json())
+        // })
 }
 
 deleteCustomer(customer: Customer){
   this.customers.splice(this.customers.indexOf(customer), 1);
   return this.http.delete('http://localhost:3000/customer/'+ customer.id)
   .map((response: Response) => response.json())
-  .catch((error: Response) => {
-    this.errorService.handleError(error.json())
-   return Observable.throw(error.json())
-  })
+  // .catch((error: Response) => {
+  //   this.errorService.handleError(error.json())
+  //  return Observable.throw(error.json())
+  // })
 }
 
 

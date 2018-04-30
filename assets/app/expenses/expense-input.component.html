@@ -1,8 +1,24 @@
   
  <div class="col-md-8 col-md.offset-2"> 
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm"> 
+  <form (ngSubmit)="onSubmit(f1)" #f1="ngForm"> 
+    <div class="form-group">
+      <label for ="name">Add New Expense</label>
+      <input 
+      type="text" 
+      id="name" 
+      class="form-control"
+      [ngModel]="expense?.name"
+      name="name"
+      required>
+      <!-- <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button> -->
+      <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>
+<div *ngIf="expense" class="col-md-8 col-md.offset-2"> 
+    <form (ngSubmit)="onSubmitEdit(f2)" #f2="ngForm"> 
       <div class="form-group">
-        <label for ="name">Name</label>
+        <label for ="name">Edit {{expense.name}} Expense</label>
         <input 
         type="text" 
         id="name" 
@@ -10,7 +26,7 @@
         [ngModel]="expense?.name"
         name="name"
         required>
-        <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button>
+        <button type="button" class="btn btn-danger" (click)="onClear(f2)">Cancel Edit</button>
         <button class="btn btn-primary" type="submit">Save</button>
       </div>
     </form>

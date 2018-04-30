@@ -3,8 +3,8 @@ var Schema = mongoose.Schema
 
 var schema = new Schema({
 name: {type: String, required: true},
-amount: {type: Number, required: true},
-date: {type: Date, required:true},
+amount: {type: Number},
+date: {type: Date},
 notes: {type: String},
 project: {type: Schema.Types.ObjectId, ref: 'Project'}
 

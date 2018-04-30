@@ -26,7 +26,8 @@ export class ProjectInputComponent implements OnInit{
       this.project = null
     } else {
 const project = new Project(form.value.name);
-this.projectService.addProject(project)
+const customer = findBy
+this.projectService.addProject(project,customer)
     .subscribe(
       data => console.log('DATAAA',data),
       error => console.log(error),

@@ -27,16 +27,17 @@ export class ExpenseService{
             return expense
           })
          
-          .catch((error: Response) => {
-            console.log("ERROR IN ADD")
-            this.errorService.handleError(error.json())
-           return Observable.throw(error.json())
-          })
+          // .catch((error: Response) => {
+          //   console.log("ERROR IN ADD")
+          //   this.errorService.handleError(error.json())
+          //  return Observable.throw(error.json())
+          // })
   }
 
   getExpenses(){
     return this.http.get('http://localhost:3000/expense')
-      .map((response:Response)=> {
+      .map((response:any)=> {
+        console.log("HERE IS RESPONSE",response.json().obj)
         const expenses = response.json().obj;
         let transformedExpenses: Expense[] = [];
         for(let expense of expenses) {
@@ -45,10 +46,10 @@ export class ExpenseService{
         this.expenses = transformedExpenses
         return transformedExpenses
       })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json())
-       return Observable.throw(error.json())
-      })
+      // .catch((error: Response) => {
+      //   this.errorService.handleError(error.json())
+      //  return Observable.throw(error.json())
+      // })
       
   }
 
@@ -61,20 +62,20 @@ updateExpense(expense:Expense){
   const headers = new Headers({'Content-Type': 'application/json'})
  return this.http.patch('http://localhost:3000/expense/'+ expense.id , body , {headers: headers})
         .map((response: Response) => response.json())
-        .catch((error: Response) => {
-          this.errorService.handleError(error.json())
-         return Observable.throw(error.json())
-        })
+        // .catch((error: Response) => {
+        //   this.errorService.handleError(error.json())
+        //  return Observable.throw(error.json())
+        // })
 }
 
 deleteExpense(expense: Expense){
   this.expenses.splice(this.expenses.indexOf(expense), 1);
   return this.http.delete('http://localhost:3000/expense/'+ expense.id)
   .map((response: Response) => response.json())
-  .catch((error: Response) => {
-    this.errorService.handleError(error.json())
-   return Observable.throw(error.json())
-  })
+  // .catch((error: Response) => {
+  //   this.errorService.handleError(error.json())
+  //  return Observable.throw(error.json())
+  // })
 }
 
 

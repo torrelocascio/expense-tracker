@@ -17,14 +17,15 @@ export class CustomerInputComponent implements OnInit{
   constructor(private customerService: CustomerService){}
 
   onSubmit(form: NgForm){
-    if (this.customer){
-      this.customer.name = form.value.name;
-      this.customerService.updateCustomer(this.customer)
-      .subscribe(
-        result => console.log(result)
-      )
-      this.customer = null
-    } else {
+    // if (this.customer){
+    //   this.customer.name = form.value.name;
+    //   this.customerService.updateCustomer(this.customer)
+    //   .subscribe(
+    //     result => console.log(result)
+    //   )
+    //   this.customer = null
+    // } else {
+      console.log(form.value.name)
 const customer = new Customer(form.value.name);
 this.customerService.addCustomer(customer)
     .subscribe(
@@ -32,10 +33,20 @@ this.customerService.addCustomer(customer)
       error => console.log(error),
 
     )
+    form.resetForm()
   }
-form.resetForm()
-  
+
+  onSubmitEdit(form: NgForm){
+        if (this.customer){
+      this.customer.name = form.value.name;
+      this.customerService.updateCustomer(this.customer)
+      .subscribe(
+        result => console.log(result)
+      )
+      this.customer = null
+      
   }
+}
 
   onClear(form: NgForm){
     this.customer=null

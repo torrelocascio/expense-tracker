@@ -2,9 +2,12 @@ import {Http, Response, Headers} from '@angular/http'
 import {Injectable, EventEmitter} from "@angular/core"
 import 'rxjs/Rx'
 import {Observable} from 'rxjs'
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 
 import {Project} from "./project.model"
+import {Customer} from "../customers/customer.model"
 import { ErrorService } from '../errors/error.service';
 
 @Injectable()
@@ -15,13 +18,13 @@ export class ProjectService{
   
   constructor(private http: Http, private errorService: ErrorService) {}
 
-  addProject(project: Project){
+  addProject(project: Project, customer: Customer){
     const body = JSON.stringify(project)
     const headers = new Headers({'Content-Type': 'application/json'})
-   return this.http.post('http://localhost:3000/project',body, {headers: headers})
+   return this.http.post('http://localhost:3000/project' + customer.id,body, {headers: headers})
           .map((response: any) => {
             const result = response.json()
-            const project = new Project(result.obj.name,result.obj._id)
+            const project = new Project(result.obj.name,result.obj._id,result.obj.customerId)
             this.projects.push(project)
             console.log("HERE")
             return project
@@ -69,6 +72,7 @@ updateProject(project:Project){
 
 deleteProject(project: Project){
   this.projects.splice(this.projects.indexOf(project), 1);
+  console.log(project)
   return this.http.delete('http://localhost:3000/project/'+ project.id)
   .map((response: Response) => response.json())
   .catch((error: Response) => {
@@ -77,5 +81,5 @@ deleteProject(project: Project){
   })
 }
 
-
 }
+

@@ -6,8 +6,15 @@
           </div>
           <footer class="panel-footer">
             <div class="author">
-              {{expense.name}}
+              <p>Project ID</p>
+              {{expense.project}}
             </div>
+            <div class="author">
+                <p>Expense Amount:</p>
+                {{expense.amount}}
+                <p>Date</p>
+                {{expense.date}}
+              </div>
             <div class="config">
               <a (click)="onEdit()">Edit</a>
               <a (click)="onDelete()">Delete</a>

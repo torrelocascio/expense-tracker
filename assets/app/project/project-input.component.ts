@@ -29,11 +29,9 @@ export class ProjectInputComponent implements OnInit{
     //   this.project = null
     // } else 
     // {
-    console.log('HERE IS FORMMMMMMMM.value',form.value)
+    
 const project = new Project(form.value.name,null,form.value.customerSelect.id);
-console.log('Here is New Project Object',project)
 const customer = form.value.customerSelect
-console.log('Here is the new customer Object',customer)
 this.projectService.addProject(project,customer)
     .subscribe(
       data => console.log('DATAAA',data),
@@ -44,6 +42,18 @@ this.projectService.addProject(project,customer)
 form.resetForm()
   
   }
+
+  onSubmitEdit(form: NgForm){
+    if (this.project){
+  this.project.name = form.value.name;
+  this.project.customerID = form.value.customerSelect.id
+  this.projectService.updateProject(this.project)
+  .subscribe(
+    result => console.log(result)
+  )
+  this.project = null
+}
+}
 
   onClear(form: NgForm){
     this.project=null

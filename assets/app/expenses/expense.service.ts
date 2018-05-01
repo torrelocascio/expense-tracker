@@ -22,7 +22,7 @@ export class ExpenseService{
    return this.http.post('http://localhost:3000/expense/' + project.id,body, {headers: headers})
           .map((response: any) => {
             const result = response.json()
-            const expense = new Expense(result.obj.name,result.obj._id)
+            const expense = new Expense(result.obj.name,result.obj.amount,result.obj._id)
             this.expenses.push(expense)
             console.log("HERE")
             return expense
@@ -42,8 +42,9 @@ export class ExpenseService{
         const expenses = response.json().obj;
         let transformedExpenses: Expense[] = [];
         for(let expense of expenses) {
-          transformedExpenses.push(new Expense(expense.name, expense._id))
+          transformedExpenses.push(new Expense(expense.name, expense.amount, expense.date, expense._id, expense.project))
         }
+        console.log('this.expensessss',this.expenses)
         this.expenses = transformedExpenses
         return transformedExpenses
       })

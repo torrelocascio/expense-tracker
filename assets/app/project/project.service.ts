@@ -22,17 +22,13 @@ export class ProjectService{
 
   addProject(project: Project, customer: Customer){
     const body = JSON.stringify(project)
-    console.log('HERE IS BODY',body)
     const customerBody = JSON.stringify(customer)
-    console.log('HERE IS customerBODY', customerBody)
     const headers = new Headers({'Content-Type': 'application/json'})
    return this.http.post('http://localhost:3000/project/' + customer.id,body, {headers: headers})
           .map((response: any) => {
-            console.log('Here is Reponse on .map',response)
             const result = response.json()
             const project = new Project(result.obj.name,result.obj._id,result.obj.customerId)
             this.projects.push(project)
-            console.log("HERE")
             return project
           })
          

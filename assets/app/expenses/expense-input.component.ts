@@ -28,7 +28,7 @@ export class ExpenseInputComponent implements OnInit{
     //   )
     //   this.expense = null
     // } else {
-const expense = new Expense(form.value.name);
+const expense = new Expense(form.value.name,form.value.amount, form.value.date);
 console.log(expense)
 const project = form.value.projectSelect
 this.expenseService.addExpense(expense,project)
@@ -43,6 +43,8 @@ this.expenseService.addExpense(expense,project)
   onSubmitEdit(form: NgForm){
         if (this.expense){
       this.expense.name = form.value.name;
+      this.expense.amount = form.value.amount
+      this.expense.date = form.value.date
       this.expenseService.updateExpense(this.expense)
       .subscribe(
         result => console.log(result)
@@ -64,7 +66,6 @@ this.expenseService.addExpense(expense,project)
     .subscribe(
       (projects: Project[]) => {
         this.projects=projects;
-        console.log("This.Projects",this.projects)
         }
     );
   }

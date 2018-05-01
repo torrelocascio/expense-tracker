@@ -50,6 +50,23 @@
         [ngModel]="expense?.name"
         name="name"
         required>
+        <br>
+        <label for ="name">Add New Expense $</label>
+        <input 
+        type="number"
+        min="0.01" step="0.01" 
+        id="amount" 
+        class="form-control"
+        [ngModel]="expense?.amount"
+        name="amount"
+        required>
+        <input 
+        type="date"
+        id="date" 
+        class="form-control"
+        [ngModel]="expense?.date"
+        name="date"
+        required>
         <button type="button" class="btn btn-danger" (click)="onClear(f2)">Cancel Edit</button>
         <button class="btn btn-primary" type="submit">Save</button>
       </div>

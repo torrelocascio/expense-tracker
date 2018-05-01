@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Project = require('../models/project')
+var Customer = require('../models/customer')
 
 
 
@@ -24,14 +25,14 @@ router.get('/', function(req,res,next){
 router.post('/:id', function (req, res, next) {  
 
         //find Customer
-        Customer.findById(req.pararms.id,function(err,customer){
+        Customer.findById(req.params.id,function(err,customer){
                 if(err){
                         return res.status(500).json({
                                 title: 'An Error Occurred',
                                 error: err
                         })
                 }
-                if (!project){
+                if (!customer){
                         return res.status(500).json({
                                 title: 'No Project Found!',
                                 error: {project:'Project Not Found'}
@@ -40,7 +41,7 @@ router.post('/:id', function (req, res, next) {
         //Create new project with Customer Attached
         var project = new Project({
                 name: req.body.name,
-                customerId: customer.id
+                customer: customer.id
         })
 
         //Save Project
@@ -57,22 +58,22 @@ router.post('/:id', function (req, res, next) {
                 })
         })  
         //Push The new project ID To the Customer's Projects Array
-       customer.projects.push(project._id)  
+       customer.projects.push(project._id)
+       customer.save()
        
-
        //Save Customer
-       customer.save(function(err,result){
-        if (err){
-                return res.status(500).json({
-                        title: 'An Error Occured',
-                        error: err
-                })
-        }
-        res.status(201).json({
-                project: 'Saved Project',
-                obj: result 
-       })
-        })  
+//        customer.save(function(err,result){
+//         if (err){
+//                 return res.status(500).json({
+//                         title: 'An Error Occured',
+//                         error: err
+//                 })
+//         }
+//         res.status(201).json({
+//                 project: 'Saved Customer',
+//                 obj: result 
+//        })
+//         })  
 
 });
 })

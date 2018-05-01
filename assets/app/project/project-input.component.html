@@ -10,8 +10,14 @@
         [ngModel]="project?.name"
         name="name"
         required>
+        
+        <select [(ngModel)]="customer" name="customerSelect" #customerName>
+          <option  *ngFor="let customer of customers" [ngValue]="customer">
+            {{customer.name}}
+          </option>
+        </select>
         <!-- <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button> -->
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit">Save New Project</button>
       </div>
     </form>
   </div>
@@ -20,7 +26,7 @@
         <div class="form-group">
           <label for ="name">Edit {{project.name}} Project</label>
           <input 
-          type="text" 
+          type="text"
           id="name" 
           class="form-control"
           [ngModel]="project?.name"

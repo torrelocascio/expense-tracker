@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Expense = require('../models/expense')
+var Project = require('../models/project')
 
 router.get('/', function(req,res,next){
         Expense.find()
@@ -18,10 +19,29 @@ router.get('/', function(req,res,next){
                  })
 })
 
-router.post('/', function (req, res, next) {    
+router.post('/:id', function (req, res, next) {    
+        Project.findById(req.params.id,function(err,project){
+                if(err){
+                        return res.status(500).json({
+                                title: 'An Error Occurred',
+                                error: err
+                        })
+                }
+                if (!project){
+                        return res.status(500).json({
+                                title: 'No Project Found!',
+                                error: {project:'Project Not Found'}
+                        })
+                }
+        //Create new project with Customer Attached
         var expense = new Expense({
-                name: req.body.name
+                name: req.body.name,
+                amount: req.body.amount,
+                date: req.body.date,
+                project: project.id
         })
+
+        //Save Project
         expense.save(function(err, result) {
                 if (err){
                         return res.status(500).json({
@@ -30,11 +50,30 @@ router.post('/', function (req, res, next) {
                         })
                 }
                 res.status(201).json({
-                        expense: 'Saved Expense',
+                        project: 'Saved Project',
                         obj: result
                 })
-        })
+        })  
+        //Push The new project ID To the Customer's Projects Array
+       project.expenses.push(expense._id)
+       project.save()
+       
+       //Save Customer
+//        customer.save(function(err,result){
+//         if (err){
+//                 return res.status(500).json({
+//                         title: 'An Error Occured',
+//                         error: err
+//                 })
+//         }
+//         res.status(201).json({
+//                 project: 'Saved Customer',
+//                 obj: result 
+//        })
+//         })  
+
 });
+})
 
 router.patch('/:id', function(req,res,next){
         Expense.findById(req.params.id, function(err,expense){

@@ -27,6 +27,7 @@ ngOnInit(){
         this.expenses=expenses
         }
     );
+
 }
 
 }

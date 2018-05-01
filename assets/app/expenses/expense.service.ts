@@ -5,6 +5,7 @@ import {Observable} from 'rxjs'
 
 
 import {Expense} from "./expense.model"
+import {Project} from "../project/project.model"
 import { ErrorService } from '../errors/error.service';
 
 @Injectable()
@@ -15,10 +16,10 @@ export class ExpenseService{
   
   constructor(private http: Http, private errorService: ErrorService) {}
 
-  addExpense(expense: Expense){
+  addExpense(expense: Expense, project: Project){
     const body = JSON.stringify(expense)
     const headers = new Headers({'Content-Type': 'application/json'})
-   return this.http.post('http://localhost:3000/expense',body, {headers: headers})
+   return this.http.post('http://localhost:3000/expense/' + project.id,body, {headers: headers})
           .map((response: any) => {
             const result = response.json()
             const expense = new Expense(result.obj.name,result.obj._id)

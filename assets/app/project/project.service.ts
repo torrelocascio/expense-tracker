@@ -46,11 +46,13 @@ export class ProjectService{
   getProjects(){
     return this.http.get('http://localhost:3000/project')
       .map((response:Response)=> {
+        console.log(response)
         const projects = response.json().obj;
         let transformedProjects: Project[] = [];
         for(let project of projects) {
-          transformedProjects.push(new Project(project.name, project._id))
+          transformedProjects.push(new Project(project.name, project._id, project.customer))
         }
+        
         this.projects = transformedProjects
         return transformedProjects
       })

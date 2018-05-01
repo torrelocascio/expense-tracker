@@ -10,6 +10,12 @@
       [ngModel]="expense?.name"
       name="name"
       required>
+      
+      <select [(ngModel)]="project" name="projectSelect" #projectName>
+          <option  *ngFor="let project of projects" [ngValue]="project">
+            {{project.name}}
+          </option>
+        </select>
       <!-- <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button> -->
       <button class="btn btn-primary" type="submit">Save</button>
     </div>

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core'
 import {ExpenseService} from "./expense.service"
 import {Expense} from "./expense.model"
 import {NgForm} from '@angular/forms'
+import { ProjectService } from '../project/project.service';
+import {Project} from '../project/project.model'
 
 @Component({
   selector: 'app-expense-input',
@@ -13,9 +15,9 @@ import {NgForm} from '@angular/forms'
 export class ExpenseInputComponent implements OnInit{
 
   expense: Expense;
-  isEditing: false
+  projects: Project[]
 
-  constructor(private expenseService: ExpenseService){}
+  constructor(private expenseService: ExpenseService, private projectService: ProjectService){}
 
   onSubmit(form: NgForm){
     // if (this.expense){
@@ -26,9 +28,10 @@ export class ExpenseInputComponent implements OnInit{
     //   )
     //   this.expense = null
     // } else {
-      console.log(form)
 const expense = new Expense(form.value.name);
-this.expenseService.addExpense(expense)
+console.log(expense)
+const project = form.value.projectSelect
+this.expenseService.addExpense(expense,project)
     .subscribe(
       data => console.log('DATAAA',data),
       error => console.log(error),
@@ -57,5 +60,12 @@ this.expenseService.addExpense(expense)
     this.expenseService.expenseIsEdit.subscribe(
       (expense: Expense) => this.expense = expense
     )
+    this.projectService.getProjects()
+    .subscribe(
+      (projects: Project[]) => {
+        this.projects=projects;
+        console.log("This.Projects",this.projects)
+        }
+    );
   }
 }

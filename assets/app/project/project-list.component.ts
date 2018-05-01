@@ -25,6 +25,7 @@ ngOnInit(){
     .subscribe(
       (projects: Project[]) =>{
         this.projects=projects
+        console.log(projects)
         }
     );
 }

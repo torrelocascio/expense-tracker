@@ -29,6 +29,7 @@ export class ProjectInputComponent implements OnInit{
     //   this.project = null
     // } else 
     // {
+    console.log('HERE IS FORMMMMMMMM.value',form.value)
 const project = new Project(form.value.name,null,form.value.customerSelect.id);
 console.log('Here is New Project Object',project)
 const customer = form.value.customerSelect

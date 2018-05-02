@@ -14,10 +14,6 @@ import { CustomerInputComponent } from './customers/customer-input.component';
 import { CustomersComponent } from './customers/customers.component';
 
 //Auth Components
-import { AuthenticationComponent } from './auth/authentication.component';
-import { LogoutComponent } from './auth/logout.component';
-import { SignupComponent } from './auth/signup.component';
-import { LoginComponent } from './auth/login.component';
 
 //Routing Components
 import { routing } from './app.routing';
@@ -52,12 +48,6 @@ import {ErrorService} from './errors/error.service'
         CustomerListComponent,
         CustomerInputComponent,
         CustomersComponent,
-
-        AuthenticationComponent,
-        LogoutComponent,
-        SignupComponent,
-        LoginComponent,
-
         ProjectComponent,
         ProjectInputComponent,
         ProjectListComponent,

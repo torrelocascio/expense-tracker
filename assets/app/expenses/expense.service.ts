@@ -17,6 +17,7 @@ export class ExpenseService{
   constructor(private http: Http, private errorService: ErrorService) {}
 
   addExpense(expense: Expense, project: Project){
+    console.log('project in add expense',project)
     const body = JSON.stringify(expense)
     const headers = new Headers({'Content-Type': 'application/json'})
    return this.http.post('http://localhost:3000/expense/' + project.id,body, {headers: headers})
@@ -27,7 +28,7 @@ export class ExpenseService{
             console.log('new expense in addexpense',expense)
             // this.expenses.push(expense)
             this.expenses.push(expense)
-        
+            console.log('full expense after in add expense which is returned',expense)
             return expense
           })
          

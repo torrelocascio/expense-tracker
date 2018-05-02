@@ -31,25 +31,23 @@ export class ExpenseInputComponent implements OnInit{
     //   )
     //   this.expense = null
     // } else {
-const expense = new Expense(form.value.name,form.value.amount, form.value.date, );
+const expense = new Expense(form.value.name,form.value.amount, form.value.date, form.value.projectSelect);
+this.expense = expense
+console.log('FORM.VALUE',form.value)
 console.log('new expense in onsubmit expense-input',expense)
 const project = form.value.projectSelect
 console.log('project in expense-input', project)
 
 this.expenseService.addExpense(expense,project)
-    // .subscribe(
-    //   (newExpense: Expense) =>{
-    //     this.expense=newExpense
-    //     }
-    // );
+    
     form.resetForm()
 
-    // this.expenseService.getExpenses()
-    // .subscribe(
-    //   (expenses: Expense[]) =>{
-    //     this.expenses=expenses
-    //     }
-    // );
+    this.expenseService.getExpenses()
+    .subscribe(
+      (expenses: Expense[]) =>{
+        this.expenses=expenses
+        }
+    );
       // data => console.log('DATAAA in onsubmit expense-input',data),
       // error => console.log(error),
     

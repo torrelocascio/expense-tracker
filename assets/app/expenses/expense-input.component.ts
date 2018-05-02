@@ -17,8 +17,6 @@ export class ExpenseInputComponent implements OnInit{
 
   expense: Expense;
   projects: Project[];
-  expenses: Expense[];
-  newExpense: Expense
 
   constructor(private expenseService: ExpenseService, private projectService: ProjectService, private customerService: CustomerService){}
 
@@ -32,26 +30,32 @@ export class ExpenseInputComponent implements OnInit{
     //   this.expense = null
     // } else {
 const expense = new Expense(form.value.name,form.value.amount, form.value.date, form.value.projectSelect);
-this.expense = expense
 console.log('FORM.VALUE',form.value)
 console.log('new expense in onsubmit expense-input',expense)
 const project = form.value.projectSelect
-console.log('project in expense-input', project)
 
 this.expenseService.addExpense(expense,project)
+.subscribe(
+  data => console.log('DATAAA',data),
+  error => console.log(error),
+
+)
+    this.expenseService.getExpenses()
+
+    
     
     form.resetForm()
 
-    this.expenseService.getExpenses()
-    .subscribe(
-      (expenses: Expense[]) =>{
-        this.expenses=expenses
-        }
-    );
+    alert('Expense Added!!!')
+
+
+
+
+
+    
+
       // data => console.log('DATAAA in onsubmit expense-input',data),
       // error => console.log(error),
-    
-    
     
   }
 

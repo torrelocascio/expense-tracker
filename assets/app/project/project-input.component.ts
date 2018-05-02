@@ -16,6 +16,7 @@ export class ProjectInputComponent implements OnInit{
 
   project: Project;
   customers: Customer[]
+  
 
   constructor(private projectService: ProjectService, private customerService: CustomerService){}
 

@@ -39,7 +39,7 @@ router.post('/:id', function (req, res, next) {
                 name: req.body.name,
                 amount: req.body.amount,
                 date: req.body.date,
-                project: project.id
+                project: project
         })
 
         
@@ -52,10 +52,13 @@ router.post('/:id', function (req, res, next) {
                                 error: err
                         })
                 }
-                res.status(201).json({
-                        project: 'Saved Expense',
-                        obj: result
+                expense.populate({path: 'project', populate: {path: 'customer'}}, function(err,doc){
+                res.json({
+                        expense: 'Saved Expense',
+                        obj: doc
+                    
                 })
+        })
         })  
 
         project.expenses.push(expense._id)
@@ -76,7 +79,7 @@ router.post('/:id', function (req, res, next) {
 //                 obj: result 
 //        })
 //         })  
-
+        
 });
 })
 

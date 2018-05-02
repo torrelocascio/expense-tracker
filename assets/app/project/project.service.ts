@@ -29,7 +29,7 @@ export class ProjectService{
    return this.http.post('http://localhost:3000/project/' + customer.id,body, {headers: headers})
           .map((response: any) => {
             const result = response.json()
- 
+            console.log('response in add project',response)
             const project = new Project(result.obj.name,result.obj._id,result.obj.customerId)
             this.projects.push(project)
             return project

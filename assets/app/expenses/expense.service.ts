@@ -12,19 +12,21 @@ import { ErrorService } from '../errors/error.service';
 
 export class ExpenseService{
   expenses: Expense[] = [];
+  project: Project = null
   expenseIsEdit = new EventEmitter<Expense>()
-  
+
   constructor(private http: Http, private errorService: ErrorService) {}
 
   addExpense(expense: Expense, project: Project){
-    console.log('project in add expense',project)
+    console.log('project in add expense')
     const body = JSON.stringify(expense)
+    console.log('body',body)
     const headers = new Headers({'Content-Type': 'application/json'})
-   return this.http.post('http://localhost:3000/expense/' + project.id,body, {headers: headers})
+   return this.http.post('http://localhost:3000/expense/' + expense.project.id,body, {headers: headers})
           .map((response: any) => {
             const result = response.json()
             console.log('resultttttttttt',result)
-            const expense = new Expense(result.obj.name,result.obj.amount,result.obj.date,result.obj.project,result.obj._id)
+            const expense = new Expense(result.obj.name,result.obj.amount,result.obj.date,result.object.project,result.obj._id)
             console.log('new expense in addexpense',expense)
             // this.expenses.push(expense)
             this.expenses.push(expense)

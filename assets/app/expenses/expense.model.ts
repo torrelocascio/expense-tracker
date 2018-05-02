@@ -1,17 +1,19 @@
+import {Project} from '../project/project.model'
+
 export class Expense {
   name: string;
   amount: number;
   date: Date;
+  project: Project;
   id: string;
-  project: string
   
 
-constructor(name: string, amount: number, date: Date, id?: string, project?: string){
+constructor(name: string, amount: number, date: Date, project?: Project, id?: string){
   this.name = name;
   this.amount= amount;
   this.date = date
-  this.id = id;
   this.project = project
+  this.id = id;
   
   }
 

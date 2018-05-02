@@ -22,9 +22,12 @@ export class ExpenseService{
    return this.http.post('http://localhost:3000/expense/' + project.id,body, {headers: headers})
           .map((response: any) => {
             const result = response.json()
-            const expense = new Expense(result.obj.name,result.obj.amount,result.obj._id)
+            console.log('resultttttttttt',result)
+            const expense = new Expense(result.obj.name,result.obj.amount,result.obj.date,result.obj.project,result.obj._id)
+            console.log('new expense in addexpense',expense)
+            // this.expenses.push(expense)
             this.expenses.push(expense)
-            console.log("HERE")
+        
             return expense
           })
          
@@ -38,14 +41,16 @@ export class ExpenseService{
   getExpenses(){
     return this.http.get('http://localhost:3000/expense')
       .map((response:any)=> {
-        console.log("HERE IS RESPONSE",response.json().obj)
+        // console.log("HERE IS RESPONSE",response.json().obj)
         const expenses = response.json().obj;
         let transformedExpenses: Expense[] = [];
         for(let expense of expenses) {
-          transformedExpenses.push(new Expense(expense.name, expense.amount, expense.date, expense._id, expense.project))
+          console.log('GetEXPENSESSSSSS',expenses)
+          transformedExpenses.push(new Expense(expense.name, expense.amount, expense.date,expense.project, expense._id))
         }
-        console.log('this.expensessss',this.expenses)
+    
         this.expenses = transformedExpenses
+        console.log('this.expensessss',this.expenses)
         return transformedExpenses
       })
       // .catch((error: Response) => {

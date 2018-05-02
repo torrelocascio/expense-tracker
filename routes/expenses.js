@@ -4,7 +4,7 @@ var Expense = require('../models/expense')
 var Project = require('../models/project')
 
 router.get('/', function(req,res,next){
-        Expense.find()
+        Expense.find().populate({path: 'project', populate: {path: 'customer'}})
                 .exec(function(err, expenses){
                         if (err){
                            return res.status(500).json({
@@ -33,6 +33,7 @@ router.post('/:id', function (req, res, next) {
                                 error: {project:'Project Not Found'}
                         })
                 }
+
         //Create new project with Customer Attached
         var expense = new Expense({
                 name: req.body.name,
@@ -40,6 +41,8 @@ router.post('/:id', function (req, res, next) {
                 date: req.body.date,
                 project: project.id
         })
+
+        
 
         //Save Project
         expense.save(function(err, result) {
@@ -50,13 +53,15 @@ router.post('/:id', function (req, res, next) {
                         })
                 }
                 res.status(201).json({
-                        project: 'Saved Project',
+                        project: 'Saved Expense',
                         obj: result
                 })
         })  
+
+        project.expenses.push(expense._id)
+        project.save()
         //Push The new project ID To the Customer's Projects Array
-       project.expenses.push(expense._id)
-       project.save()
+   
        
        //Save Customer
 //        customer.save(function(err,result){

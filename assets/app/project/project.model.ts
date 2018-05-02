@@ -1,13 +1,16 @@
+import {Customer} from '../customers/customer.model'
+import {Expense} from '../expenses/expense.model'
+
 export class Project {
   name: string;
+  customer: Customer;
+  expenses: [Expense];
   id: string;
-  customerID: string
-  expenses: [string]
 
-constructor(name: string, id?: string,  customerID?: string, expenses?: [string]){
+constructor(name: string,  customer?: Customer, expenses?: [Expense], id?: string ){
   this.name = name;
+  this.customer = customer
   this.id = id;
-  this.customerID = customerID;
   this.expenses = expenses
 
   }

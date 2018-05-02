@@ -6,7 +6,7 @@ var Customer = require('../models/customer')
 
 
 router.get('/', function(req,res,next){
-        Project.find()
+        Project.find().populate('customer')
                 .exec(function(err, projects){
                         if (err){
                            return res.status(500).json({
@@ -14,7 +14,6 @@ router.get('/', function(req,res,next){
                                 error: err  
                         })
                  }
-                 
                 res.status(201).json({
                         project: 'Success',
                         obj: projects
@@ -42,7 +41,7 @@ router.post('/:id', function (req, res, next) {
         //Create new project with Customer Attached
         var project = new Project({
                 name: req.body.name,
-                customer: customer.id
+                customer: customer._id
         })
 
         //Save Project
@@ -59,7 +58,7 @@ router.post('/:id', function (req, res, next) {
                 })
         })  
         //Push The new project ID To the Customer's Projects Array
-       customer.projects.push(project._id)
+       customer.projects.push(project.id)
        customer.save()
        
        //Save Customer

@@ -22,11 +22,14 @@ export class ProjectService{
 
   addProject(project: Project, customer: Customer){
     const body = JSON.stringify(project)
-    const customerBody = JSON.stringify(customer)
+    console.log('body',body);
+    const customerBody = JSON.stringify(customer);
+    console.log('CustomerBody',customerBody)
     const headers = new Headers({'Content-Type': 'application/json'})
    return this.http.post('http://localhost:3000/project/' + customer.id,body, {headers: headers})
           .map((response: any) => {
             const result = response.json()
+ 
             const project = new Project(result.obj.name,result.obj._id,result.obj.customerId)
             this.projects.push(project)
             return project
@@ -42,14 +45,16 @@ export class ProjectService{
   getProjects(){
     return this.http.get('http://localhost:3000/project')
       .map((response:Response)=> {
-        console.log(response)
         const projects = response.json().obj;
+        console.log('NEWWWW RESSULTTTT', projects)
+        console.log('___',projects.customerID)
         let transformedProjects: Project[] = [];
         for(let project of projects) {
-          transformedProjects.push(new Project(project.name, project._id, project.customer))
+          transformedProjects.push(new Project(project.name,project.customer, null, project._id, ))
         }
         
         this.projects = transformedProjects
+        console.log('this.projects+++++++++++++',this.projects)
         return transformedProjects
       })
       .catch((error: Response) => {

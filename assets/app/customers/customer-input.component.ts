@@ -25,11 +25,10 @@ export class CustomerInputComponent implements OnInit{
     //   )
     //   this.customer = null
     // } else {
-      console.log(form.value.name)
 const customer = new Customer(form.value.name);
 this.customerService.addCustomer(customer)
     .subscribe(
-      data => console.log('DATAAA',data),
+      data => console.log('Added Customer Data',data),
       error => console.log(error),
 
     )
@@ -41,7 +40,7 @@ this.customerService.addCustomer(customer)
       this.customer.name = form.value.name;
       this.customerService.updateCustomer(this.customer)
       .subscribe(
-        result => console.log(result)
+        result => console.log('result on submitedit for customer',result)
       )
       this.customer = null
       

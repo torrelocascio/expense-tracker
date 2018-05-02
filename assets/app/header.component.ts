@@ -5,6 +5,8 @@ import {Component} from '@angular/core'
   template: `
   <header class="row">
     <nav class="col-md-8 col-md-offset-2">
+    <h1>The Expense Tracker</h1>
+    <br>
       <ul class="nav nav-pills">
         <li routerLinkActive="active">
           <a [routerLink]="['/customers']"> Customers</a> 

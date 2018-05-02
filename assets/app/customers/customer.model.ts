@@ -1,12 +1,14 @@
+import {Project} from '../project/project.model'
+
 export class Customer {
   name: string;
+  projects: [Project];
   id: string;
-  projects: [string]
 
-constructor(name: string, id?: string, projects?: [string]){
+constructor(name: string, projects?: [Project],  id?: string, ){
   this.name = name;
-  this.id = id;
   this.projects = projects
+  this.id = id;
   
   }
 

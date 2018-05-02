@@ -21,9 +21,9 @@ export class CustomerService{
    return this.http.post('http://localhost:3000/customer',body, {headers: headers})
           .map((response: any) => {
             const result = response.json()
-            const customer = new Customer(result.obj.name,result.obj._id)
+            const customer = new Customer(result.obj.name,null,result.obj._id)
             this.customers.push(customer)
-            console.log("HERE")
+            console.log("HERE In Add Customer")
             return customer
           })
          
@@ -37,11 +37,11 @@ export class CustomerService{
   getCustomers(){
     return this.http.get('http://localhost:3000/customer')
       .map((response:Response)=> {
-        console.log(response.json().obj)
+        console.log('======response.json.obj in getCustomers',response.json().obj)
         const customers = response.json().obj;
         let transformedCustomers: Customer[] = [];
         for(let customer of customers) {
-          transformedCustomers.push(new Customer(customer.name, customer._id))
+          transformedCustomers.push(new Customer(customer.name, customer.projects, customer._id))
         }
         this.customers = transformedCustomers
         return transformedCustomers

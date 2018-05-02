@@ -4,6 +4,7 @@ import {Expense} from "./expense.model"
 import {NgForm} from '@angular/forms'
 import { ProjectService } from '../project/project.service';
 import {Project} from '../project/project.model'
+import { CustomerService } from '../customers/customer.service';
 
 @Component({
   selector: 'app-expense-input',
@@ -15,9 +16,11 @@ import {Project} from '../project/project.model'
 export class ExpenseInputComponent implements OnInit{
 
   expense: Expense;
-  projects: Project[]
+  projects: Project[];
+  expenses: Expense[];
+  newExpense: Expense
 
-  constructor(private expenseService: ExpenseService, private projectService: ProjectService){}
+  constructor(private expenseService: ExpenseService, private projectService: ProjectService, private customerService: CustomerService){}
 
   onSubmit(form: NgForm){
     // if (this.expense){
@@ -28,16 +31,30 @@ export class ExpenseInputComponent implements OnInit{
     //   )
     //   this.expense = null
     // } else {
-const expense = new Expense(form.value.name,form.value.amount, form.value.date);
-console.log(expense)
+const expense = new Expense(form.value.name,form.value.amount, form.value.date, );
+console.log('new expense in onsubmit expense-input',expense)
 const project = form.value.projectSelect
-this.expenseService.addExpense(expense,project)
-    .subscribe(
-      data => console.log('DATAAA',data),
-      error => console.log(error),
+console.log('project in expense-input', project)
 
-    )
+this.expenseService.addExpense(expense,project)
+    // .subscribe(
+    //   (newExpense: Expense) =>{
+    //     this.expense=newExpense
+    //     }
+    // );
     form.resetForm()
+
+    // this.expenseService.getExpenses()
+    // .subscribe(
+    //   (expenses: Expense[]) =>{
+    //     this.expenses=expenses
+    //     }
+    // );
+      // data => console.log('DATAAA in onsubmit expense-input',data),
+      // error => console.log(error),
+    
+    
+    
   }
 
   onSubmitEdit(form: NgForm){
@@ -47,7 +64,7 @@ this.expenseService.addExpense(expense,project)
       this.expense.date = form.value.date
       this.expenseService.updateExpense(this.expense)
       .subscribe(
-        result => console.log(result)
+        result => console.log('result in OnsubmitEdit for expense',result)
       )
       this.expense = null
       

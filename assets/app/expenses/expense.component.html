@@ -1,23 +1,32 @@
 
-        
+<!--         
         <article class="panel panel-default">
           <div class="panel-body">
             {{expense.name}}
           </div>
           <footer class="panel-footer">
             <div class="author">
-              <p>Project ID</p>
-              {{expense.project}}
+              <p>Project Name</p>
+             
             </div>
             <div class="author">
                 <p>Expense Amount:</p>
-                {{expense.amount}}
+                
                 <p>Date</p>
-                {{expense.date}}
+               
               </div>
             <div class="config">
-              <a (click)="onEdit()">Edit</a>
-              <a (click)="onDelete()">Delete</a>
+ 
+             
             </div>
           </footer>
-                </article>
+                </article> -->
+          <div class="row">
+            <div class="col-xs-1"><a (click)="onEdit()">Edit</a></div>
+            <div class="col-xs-2"><p> {{expense.date | date:'MM/dd/yyyy'}}</p></div>
+            <div class="col-xs-2">{{expense.project.customer.name}}</div>
+            <div class="col-xs-2">{{expense.project.name}}</div>
+            <div class="col-xs-2">{{expense.name}}</div>
+            <div class="col-xs-1">{{expense.amount}}</div>
+            <div class="col-xs-1"> <a (click)="onDelete()">Delete</a></div>
+          </div>

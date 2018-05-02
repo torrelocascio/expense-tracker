@@ -1,8 +1,8 @@
   
- <div *ngIf="!expense" class="col-md-8 col-md.offset-2"> 
+ <div *ngIf="!expense" class="col-md-4 col-md.offset-2"> 
   <form (ngSubmit)="onSubmit(f1)" #f1="ngForm"> 
     <div class="form-group">
-      <label for ="name">Add New Expense</label>
+      <label for ="name" style="font-size:1.2em">Add New Expense Name</label>
       <input 
       type="text" 
       id="name" 
@@ -10,6 +10,13 @@
       [ngModel]="expense?.name"
       name="name"
       required>
+      <br>
+      <label for="customerName">Choose A Customer</label>
+      <!-- <select [(ngModel)]="customer" name="customerSelect" #customerName>
+          <option  *ngFor="let customer of customers" [ngValue]="customer">
+            {{customer.name}}
+          </option>
+        </select> -->
       <label for="projectName">Choose A Project</label>
       <select [(ngModel)]="project" name="projectSelect" #projectName>
           <option  *ngFor="let project of projects" [ngValue]="project">
@@ -17,7 +24,9 @@
           </option>
         </select>
         <br>
-      <label for ="name">Add New Expense $</label>
+        <br>
+        <br>
+      <label for ="name">Add New Expense Amount $</label>
       <input 
       type="number"
       min="0.01" step="0.01" 
@@ -26,6 +35,9 @@
       [ngModel]="expense?.amount"
       name="amount"
       required>
+      <br>
+      <br>
+      <label>Date Incurred</label>
       <input 
       type="date"
       id="date" 
@@ -33,13 +45,68 @@
       [ngModel]="expense?.date"
       name="date"
       required>
+      <br>
+      <br>
+      <br>
           
       <!-- <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button> -->
-      <button class="btn btn-primary" type="submit">Save</button>
+      <button class="btn btn-primary" type="submit">Add and Save</button>
     </div>
   </form>
 </div>
-<div *ngIf="expense" class="col-md-8 col-md.offset-2"> 
+
+<!-- For Edit!!!!!!!!!!!!!!! -->
+<div *ngIf="expense" class="col-md-4 col-md.offset-2"> 
+    <form (ngSubmit)="onSubmitEdit(f2)" #f2="ngForm"> 
+      <div class="form-group">
+        <label for ="name">Add New Expense</label>
+        <input 
+        type="text" 
+        id="name" 
+        class="form-control"
+        [ngModel]="expense?.name"
+        name="name"
+        required>
+        <br>
+        <label for="projectName">Choose A Project</label>
+        <select [(ngModel)]="project" name="projectSelect" #projectName>
+            <option  *ngFor="let project of projects" [ngValue]="project">
+              {{project.name}}
+            </option>
+          </select>
+          <br>
+          <br>
+          <br>
+        <label for ="name">Add New Expense Amount $</label>
+        <input 
+        type="number"
+        min="0.01" step="0.01" 
+        id="amount" 
+        class="form-control"
+        [ngModel]="expense?.amount"
+        name="amount"
+        required>
+        <br>
+        <br>
+        <label>Date Incurred</label>
+        <input 
+        type="date"
+        id="date" 
+        class="form-control"
+        [ngModel]="expense?.date"
+        name="date"
+        required>
+        <br>
+        <br>
+        <br>
+        
+        <!-- <button type="button" class="btn btn-danger" (click)="onClear(f)">Clear</button> -->
+        <button class="btn btn-primary" type="submit">Save Edit</button>
+        <button type="button" class="btn btn-danger" (click)="onClear(f2)">Cancel Edit</button>   
+      </div>
+    </form>
+  </div>
+<!-- <div *ngIf="expense" class="col-md-8 col-md.offset-2"> 
     <form (ngSubmit)="onSubmitEdit(f2)" #f2="ngForm"> 
       <div class="form-group">
         <label for ="name">Edit {{expense.name}} Expense</label>
@@ -71,4 +138,4 @@
         <button class="btn btn-primary" type="submit">Save</button>
       </div>
     </form>
-  </div>
+  </div> -->

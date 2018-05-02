@@ -60,7 +60,7 @@ editCustomer(customer: Customer){
 updateCustomer(customer:Customer){
   const body = JSON.stringify(customer)
   const headers = new Headers({'Content-Type': 'application/json'})
- return this.http.patch('http://localhost:3000/customer/'+ customer.id , body , {headers: headers})
+ return this.http.patch('https://expense-tracker-torrelocascio.herokuapp.com/customer/'+ customer.id , body , {headers: headers})
         .map((response: Response) => response.json())
         // .catch((error: Response) => {
         //   this.errorService.handleError(error.json())
@@ -70,7 +70,7 @@ updateCustomer(customer:Customer){
 
 deleteCustomer(customer: Customer){
   this.customers.splice(this.customers.indexOf(customer), 1);
-  return this.http.delete('http://localhost:3000/customer/'+ customer.id)
+  return this.http.delete('https://expense-tracker-torrelocascio.herokuapp.com/'+ customer.id)
   .map((response: Response) => response.json())
   // .catch((error: Response) => {
   //   this.errorService.handleError(error.json())

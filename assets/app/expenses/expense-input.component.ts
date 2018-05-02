@@ -46,7 +46,7 @@ this.expenseService.addExpense(expense,project)
     
     form.resetForm()
 
-    alert('Expense Added!!!')
+    alert('Expense Added!!! Please Refresh to See New Expense')
 
 
 

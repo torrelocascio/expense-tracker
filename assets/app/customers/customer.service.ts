@@ -18,7 +18,7 @@ export class CustomerService{
   addCustomer(customer: Customer){
     const body = JSON.stringify(customer)
     const headers = new Headers({'Content-Type': 'application/json'})
-   return this.http.post('https://git.heroku.com/expense-tracker-torrelocascio.git/customer',body, {headers: headers})
+   return this.http.post('http://git.heroku.com/expense-tracker-torrelocascio.git/customer',body, {headers: headers})
           .map((response: any) => {
             const result = response.json()
             const customer = new Customer(result.obj.name,null,result.obj._id)
@@ -35,7 +35,7 @@ export class CustomerService{
   }
 
   getCustomers(){
-    return this.http.get('https://git.heroku.com/expense-tracker-torrelocascio.git/customer')
+    return this.http.get('http://git.heroku.com/expense-tracker-torrelocascio.git/customer')
       .map((response:Response)=> {
         console.log('======response.json.obj in getCustomers',response.json().obj)
         const customers = response.json().obj;
@@ -60,7 +60,7 @@ editCustomer(customer: Customer){
 updateCustomer(customer:Customer){
   const body = JSON.stringify(customer)
   const headers = new Headers({'Content-Type': 'application/json'})
- return this.http.patch('https://git.heroku.com/expense-tracker-torrelocascio.git/customer/'+ customer.id , body , {headers: headers})
+ return this.http.patch('http://git.heroku.com/expense-tracker-torrelocascio.git/customer/'+ customer.id , body , {headers: headers})
         .map((response: Response) => response.json())
         // .catch((error: Response) => {
         //   this.errorService.handleError(error.json())
@@ -70,7 +70,7 @@ updateCustomer(customer:Customer){
 
 deleteCustomer(customer: Customer){
   this.customers.splice(this.customers.indexOf(customer), 1);
-  return this.http.delete('https://git.heroku.com/expense-tracker-torrelocascio.git/'+ customer.id)
+  return this.http.delete('http://git.heroku.com/expense-tracker-torrelocascio.git/'+ customer.id)
   .map((response: Response) => response.json())
   // .catch((error: Response) => {
   //   this.errorService.handleError(error.json())

@@ -13,7 +13,8 @@ var expenseRoutes = require('./routes/expenses');
 
 
 var app = express();
-mongoose.connect('mongodb://localhost:27017/pbsd-expense-project'); 
+// mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds111430.mlab.com:11430/expense-tracker'); 
+mongoose.connect('torrelocascio:password@ds111430.mlab.com:11430/expense-tracker'); 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

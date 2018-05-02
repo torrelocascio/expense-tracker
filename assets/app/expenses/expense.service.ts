@@ -22,7 +22,7 @@ export class ExpenseService{
     const body = JSON.stringify(expense)
     console.log('body',body)
     const headers = new Headers({'Content-Type': 'application/json'})
-   return this.http.post('http://git.heroku.com/expense-tracker-torrelocascio.gitexpense/' + expense.project.id,body, {headers: headers})
+   return this.http.post('https://git.heroku.com/expense-tracker-torrelocascio.gitexpense/' + expense.project.id,body, {headers: headers})
           .map((response: any) => {
             const result = response.json()
             console.log('resultttttttttt',result)

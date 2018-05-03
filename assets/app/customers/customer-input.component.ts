@@ -52,8 +52,8 @@ this.customerService.addCustomer(customer)
     form.resetForm
   }
   ngOnInit(){
-    // this.customerService.customerIsEdit.subscribe(
-    //   (customer: Customer) => this.customer = customer
-    // )
+    this.customerService.customerIsEdit.subscribe(
+      (customer: Customer) => this.customer = customer
+    )
   }
 }

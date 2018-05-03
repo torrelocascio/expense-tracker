@@ -35,11 +35,11 @@ export class ProjectService{
             return project
           })
          
-          .catch((error: Response) => {
-            console.log("ERROR IN ADD")
-            this.errorService.handleError(error.json())
-            return Observable.throw(error.json())
-          })
+          // .catch((error: Response) => {
+          //   console.log("ERROR IN ADD")
+          //   this.errorService.handleError(error.json())
+          //   return Observable.throw(error.json())
+          // })
   }
 
   getProjects(){
@@ -57,10 +57,10 @@ export class ProjectService{
         console.log('this.projects+++++++++++++',this.projects)
         return transformedProjects
       })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json())
-       return Observable.throw(error.json())
-      })
+      // .catch((error: Response) => {
+      //   this.errorService.handleError(error.json())
+      //  return Observable.throw(error.json())
+      // })
       
   }
 
@@ -73,10 +73,10 @@ updateProject(project:Project){
   const headers = new Headers({'Content-Type': 'application/json'})
  return this.http.patch('https://expense-tracker-torrelocascio.herokuapp.com/projects'+ project.id , body , {headers: headers})
         .map((response: Response) => response.json())
-        .catch((error: Response) => {
-          this.errorService.handleError(error.json())
-         return Observable.throw(error.json())
-        })
+        // .catch((error: Response) => {
+        //   this.errorService.handleError(error.json())
+        //  return Observable.throw(error.json())
+        // })
 }
 
 deleteProject(project: Project){
@@ -84,10 +84,10 @@ deleteProject(project: Project){
   console.log(project)
   return this.http.delete('https://expense-tracker-torrelocascio.herokuapp.com/projects/'+ project.id)
   .map((response: Response) => response.json())
-  .catch((error: Response) => {
-    this.errorService.handleError(error.json())
-   return Observable.throw(error.json())
-  })
+//   .catch((error: Response) => {
+//     this.errorService.handleError(error.json())
+//    return Observable.throw(error.json())
+//   })
 }
 
 

@@ -12,9 +12,6 @@ import {Component} from '@angular/core'
           <a [routerLink]="['/customers']"> Customers</a> 
         </li>
         <li routerLinkActive="active">
-          <a [routerLink]="['/auth']"> Authentication</a> 
-        </li>
-        <li routerLinkActive="active">
           <a [routerLink]="['/projects']"> Projects </a>  
         </li>
         <li routerLinkActive="active">

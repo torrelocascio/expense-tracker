@@ -28,26 +28,25 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
-    next();
-});
+// app.use(function (req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
+//     next();
+// });
+// app.use(function (req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
+//     next();
+// });
 
-var originsWhitelist = [
-    'http://localhost:4200',      //this is my front-end url for development
-     'https://expense-tracker-torrelocascio.herokuapp.com/customers'
-  ];
-  var corsOptions = {
-    origin: function(origin, callback){
-          var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
-          callback(null, isWhitelisted);
-    },
-    credentials:true
-  }
-  //here is the magic
-  app.use(cors(corsOptions));
+app.use(
+    cors({
+      credentials: true,                 // allow other domains to send cookies
+      origin: ["http://localhost:4200"]  // these are the domains that are allowed
+    })
+  );
 
 
 app.use('/expense', expenseRoutes)
